@@ -13,6 +13,19 @@ def findLength(nums):
 
     return max_len
 
+def numberOfLines(widths, s):
+    lines = 1
+    curr_w = 0
+    for symbol in s:
+        symbol_width = widths[ord(symbol) - ord('a')]
+        if curr_w + symbol_width > 100:
+            lines += 1
+            curr_w = symbol_width
+        else:
+            curr_w += symbol_width
+    return [lines, curr_w]
+
+
 def main():
     print(findLength([1,2,3,4,2,3]))
 
