@@ -25,9 +25,36 @@ def numberOfLines(widths, s):
             curr_w += symbol_width
     return [lines, curr_w]
 
+def numIslands(grid):
+    if not grid:
+        return 0
+    rows = len(grid)
+    col = len(grid[0])
+    islands = 0
+
+    def dfs(r, c):
+        if r < 0 or c < 0 or r >= rows or c >= col or grid[r][c] == "0":
+            return
+        grid[r][c] = "0"
+        dfs(r - 1, c)
+        dfs(r + 1, c)
+        dfs(r, c + 1)
+        dfs(r, c - 1)
+
+    for r in range(rows):
+        for c in range(col):
+            if grid[r][c] == "1":
+                islands += 1
+                dfs(r,c)
+    return islands
 
 def main():
-    print(findLength([1,2,3,4,2,3]))
+    print(numIslands([
+  ["1","1","0","0","0"],
+  ["1","1","0","0","0"],
+  ["0","0","1","0","0"],
+  ["0","0","0","1","1"]
+]))
 
 
 if __name__ == '__main__':
